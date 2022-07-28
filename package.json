@@ -1,0 +1,28 @@
+{
+  "name": "expo-appcenter",
+  "version": "0.1.0",
+  "description": "Expo plugin for react native appcenter SDK",
+  "main": "index.js",
+  "repository": "git@github.com:BelkaLab/expo-appcenter.git",
+  "author": "fabrizio_rizzonelli <fabrizio@belkadigital.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/BelkaLab/expo-appcenter#readme",
+  "bugs": {
+    "url": "https://github.com/BelkaLab/expo-appcenter/issues"
+  },
+  "private": false,
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
+  },
+  "devDependencies": {
+    "expo-module-scripts": "^2.0.0"
+  },
+  "dependencies": {
+    "@expo/config-plugins": "^4.1.5"
+  }
+}
