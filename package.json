@@ -4,7 +4,7 @@
   "description": "Expo plugin for react native appcenter SDK",
   "main": "index.js",
   "repository": "git@github.com:BelkaLab/expo-appcenter.git",
-  "author": "fabrizio_rizzonelli <fabrizio@belkadigital.com>",
+  "author": "FRizzonelli <fabrizio.rizzonelli@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/BelkaLab/expo-appcenter#readme",
   "bugs": {
