@@ -42,7 +42,7 @@ export const withAppCenterAppDelegate: ConfigPlugin = (config) => {
         config.modRequest.projectRoot
       );
       let contents = await fs.readFile(fileInfo.path, "utf-8");
-      if (fileInfo.language === "objc") {
+      if (fileInfo.language === "objc" || fileInfo.language === "objcpp") {
         contents = modifyObjcAppDelegate(contents);
       } else {
         // TODO: Support Swift
