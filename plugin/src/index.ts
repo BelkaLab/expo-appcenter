@@ -1,4 +1,4 @@
-import { ConfigPlugin, withPlugins } from "@expo/config-plugins";
+import { ConfigPlugin, StaticPlugin, withPlugins } from "@expo/config-plugins";
 import {
   AndroidProps,
   withAndroidAppCenterConfigFile,
@@ -24,6 +24,16 @@ interface PluginProps {
   iosAppCenterPath?: string;
 
   androidOptions?: AndroidProps;
+  /**
+   * Disable iOS App Center integration
+   * @default false
+   */
+  disableiOS?: boolean;
+  /**
+   * Disable Android App Center integration
+   * @default false
+   */
+  disableAndroid?: boolean;
 }
 
 /**
@@ -31,31 +41,50 @@ interface PluginProps {
  */
 const withAppCenter: ConfigPlugin<PluginProps> = (
   config,
-  { androidAppCenterPath, iosAppCenterPath, androidOptions = {} } = {}
+  {
+    androidAppCenterPath,
+    iosAppCenterPath,
+    androidOptions = {},
+    disableiOS = false,
+    disableAndroid = false,
+  } = {}
 ) => {
+  if (disableiOS && disableAndroid) {
+    return config;
+  }
   const resolvedAndroidConfigPath =
     androidAppCenterPath || DEFAULT_ANDROID_APP_CENTER_CONFIG_PATH;
 
   const resolvedIosConfigPath =
     iosAppCenterPath || DEFAULT_IOS_APP_CENTER_CONFIG_PATH;
 
+  const iosPlugins = disableiOS
+    ? []
+    : [
+        withAppCenterAppDelegate,
+        [
+          withIosAppCenterConfigFile,
+          {
+            relativePath: resolvedIosConfigPath,
+          },
+        ],
+      ];
+
+  const androidPlugins = disableAndroid
+    ? []
+    : [
+        [withAppCenterStringsXML, androidOptions],
+        [
+          withAndroidAppCenterConfigFile,
+          {
+            relativePath: resolvedAndroidConfigPath,
+          },
+        ],
+      ];
+
   return withPlugins(config, [
-    // iOS
-    withAppCenterAppDelegate,
-    [
-      withIosAppCenterConfigFile,
-      {
-        relativePath: resolvedIosConfigPath,
-      },
-    ],
-    // Android
-    [withAppCenterStringsXML, androidOptions],
-    [
-      withAndroidAppCenterConfigFile,
-      {
-        relativePath: resolvedAndroidConfigPath,
-      },
-    ],
+    ...(iosPlugins as StaticPlugin[]),
+    ...(androidPlugins as StaticPlugin[]),
   ]);
 };
 
