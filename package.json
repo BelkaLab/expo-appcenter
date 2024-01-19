@@ -1,6 +1,6 @@
 {
   "name": "expo-appcenter",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Expo plugin for react native appcenter SDK",
   "main": "app.plugin.js",
   "repository": "git@github.com:BelkaLab/expo-appcenter.git",
