@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@expo/config-types": "^48.0.0",
-    "expo-module-scripts": "^3.0.9"
+    "expo-module-scripts": "^3.4.0"
   },
   "dependencies": {
     "@expo/config-plugins": "^6.0.2"
